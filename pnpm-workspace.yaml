@@ -1,10 +1,2 @@
 packages:
   - 'packages/**/*'
-
-catalog:
-  'vite': '6.3.5'
-  '@sveltejs/kit': '2.21.2'
-  '@sveltejs/vite-plugin-svelte': '5.1.0'
-  'svelte': '5.33.17'
-  'svelte-check': '4.2.1'
-  'vitest': '3.2.2'

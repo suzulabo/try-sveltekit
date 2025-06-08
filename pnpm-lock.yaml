@@ -4,27 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-catalogs:
-  default:
-    '@sveltejs/kit':
-      specifier: 2.21.2
-      version: 2.21.2
-    '@sveltejs/vite-plugin-svelte':
-      specifier: 5.1.0
-      version: 5.1.0
-    svelte:
-      specifier: 5.33.17
-      version: 5.33.17
-    svelte-check:
-      specifier: 4.2.1
-      version: 4.2.1
-    vite:
-      specifier: 6.3.5
-      version: 6.3.5
-    vitest:
-      specifier: 3.2.2
-      version: 3.2.2
-
 importers:
 
   .:
@@ -72,25 +51,25 @@ importers:
   packages/web-notification:
     devDependencies:
       '@sveltejs/kit':
-        specifier: 'catalog:'
+        specifier: 2.21.2
         version: 2.21.2(@sveltejs/vite-plugin-svelte@5.1.0(svelte@5.33.17)(vite@6.3.5(@types/node@22.15.30)(jiti@2.4.2)))(svelte@5.33.17)(vite@6.3.5(@types/node@22.15.30)(jiti@2.4.2))
       '@sveltejs/vite-plugin-svelte':
-        specifier: 'catalog:'
+        specifier: 5.1.0
         version: 5.1.0(svelte@5.33.17)(vite@6.3.5(@types/node@22.15.30)(jiti@2.4.2))
       firebase:
         specifier: 11.9.0
         version: 11.9.0
       svelte:
-        specifier: 'catalog:'
+        specifier: 5.33.17
         version: 5.33.17
       svelte-check:
-        specifier: 'catalog:'
+        specifier: 4.2.1
         version: 4.2.1(picomatch@4.0.2)(svelte@5.33.17)(typescript@5.8.3)
       vite:
-        specifier: 'catalog:'
+        specifier: 6.3.5
         version: 6.3.5(@types/node@22.15.30)(jiti@2.4.2)
       vitest:
-        specifier: 'catalog:'
+        specifier: 3.2.2
         version: 3.2.2(@types/node@22.15.30)(jiti@2.4.2)
 
 packages:

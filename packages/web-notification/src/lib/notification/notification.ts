@@ -32,5 +32,20 @@ export const listenOnMessage = () => {
   const messaging = getMessaging();
   onMessage(messaging, (payload) => {
     console.log({ payload });
+    if (Notification.permission === 'granted') {
+      const { title, body, icon } = payload.notification || {};
+      const link = payload.fcmOptions?.link;
+
+      const notification = new Notification(title || 'タイトル', {
+        body: body || '本文',
+        icon: icon || '/icon.png',
+      });
+
+      if (link) {
+        notification.addEventListener('click', () => {
+          window.open(link, '_blank');
+        });
+      }
+    }
   });
 };

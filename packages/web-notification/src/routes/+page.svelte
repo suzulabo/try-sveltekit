@@ -1,8 +1,10 @@
 <script lang="ts">
   import { postLog } from '$lib/fetch/postLog';
+  import { postSendMessage } from '$lib/fetch/postSendMessage';
   import { getNotificationToken } from '$lib/notification/notification';
 
   let token = $state('');
+  let sendToken = $state('');
 
   const getTokenClick = async () => {
     token = await getNotificationToken();
@@ -10,6 +12,12 @@
   };
   const copyTokenClick = async () => {
     await navigator.clipboard.writeText(token);
+  };
+  const sendTokenClick = async () => {
+    if (!sendToken) {
+      return;
+    }
+    await postSendMessage(sendToken);
   };
 </script>
 
@@ -24,6 +32,11 @@
     <input value={token} readonly />
     <button onclick={copyTokenClick}>Copy token</button>
   </div>
+
+  <div class="send-token-box">
+    <input bind:value={sendToken} />
+    <button onclick={sendTokenClick}>Send</button>
+  </div>
 </div>
 
 <style lang="scss">
@@ -33,10 +46,8 @@
     flex-direction: column;
     gap: 16px;
 
-    .get-token-box {
-      input {
-        width: 100%;
-      }
+    input {
+      width: 100%;
     }
   }
 </style>

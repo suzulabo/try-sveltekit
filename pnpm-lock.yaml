@@ -56,6 +56,9 @@ importers:
       '@sveltejs/vite-plugin-svelte':
         specifier: 5.1.0
         version: 5.1.0(svelte@5.33.17)(vite@6.3.5(@types/node@22.15.30)(jiti@2.4.2)(sass-embedded@1.89.1))
+      fcm-cloudflare-workers:
+        specifier: 2.0.1
+        version: 2.0.1(@hono/zod-validator@0.2.2(hono@4.7.11)(zod@3.25.56))(hono@4.7.11)(zod@3.25.56)
       firebase:
         specifier: 11.9.0
         version: 11.9.0
@@ -490,6 +493,12 @@ packages:
     resolution: {integrity: sha512-tMXdRCfYVixjuFK+Hk0Q1s38gV9zDiDJfWL3h1rv4Qc39oILCu1TRTDt7+fGUI8K4G1Fj125Hx/ru3azECWTyQ==}
     engines: {node: '>=6'}
     hasBin: true
+
+  '@hono/zod-validator@0.2.2':
+    resolution: {integrity: sha512-dSDxaPV70Py8wuIU2QNpoVEIOSzSXZ/6/B/h4xA7eOMz7+AarKTSGV8E6QwrdcCbBLkpqfJ4Q2TmBO0eP1tCBQ==}
+    peerDependencies:
+      hono: '>=3.9.0'
+      zod: ^3.19.1
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1055,6 +1064,13 @@ packages:
     resolution: {integrity: sha512-CzbClwlXAuiRQAlUyfqPgvPoNKTckTPGfwZV4ZdAhVcP2lh9KUxJg2b5GkE7XbjKQ3YJnQ9z6D9ntLAlB+tP8g==}
     engines: {node: '>=0.8.0'}
 
+  fcm-cloudflare-workers@2.0.1:
+    resolution: {integrity: sha512-x5QlI0zhBpS7rBpVj8EJzB/6nvtMwRA7yhNDwL1YNrevb2HXQSu2IaJ/HSzErT+5jz+3/LiDWsyVxxN07aa4TQ==}
+    peerDependencies:
+      '@hono/zod-validator': ^0.2.2
+      hono: ^4.5.10
+      zod: ^3.23.8
+
   fdir@6.4.5:
     resolution: {integrity: sha512-4BG7puHpVsIYxZUbiUE3RqGloLaSSwzYie5jvasC4LWuBWzZawynvYouhjbQKw2JuIGYdm0DzIxl8iVidKlUEw==}
     peerDependencies:
@@ -1112,6 +1128,10 @@ packages:
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+
+  hono@4.7.11:
+    resolution: {integrity: sha512-rv0JMwC0KALbbmwJDEnxvQCeJh+xbS3KEWW5PC9cMJ08Ur9xgatI0HmtgYZfOdOSOeYsp5LO2cOhdI8cLEbDEQ==}
+    engines: {node: '>=16.9.0'}
 
   http-parser-js@0.5.10:
     resolution: {integrity: sha512-Pysuw9XpUq5dVc/2SMHpuTY01RFl8fttgcyunjL7eEMhGM3cI4eOmiCycJDVCo/7O7ClfQD3SaI6ftDzqOXYMA==}
@@ -1774,6 +1794,9 @@ packages:
   zimmerframe@1.1.2:
     resolution: {integrity: sha512-rAbqEGa8ovJy4pyBxZM70hg4pE6gDgaQ0Sl9M3enG3I0d6H4XSAM3GeNGLKnsBpuijUow064sf7ww1nutC5/3w==}
 
+  zod@3.25.56:
+    resolution: {integrity: sha512-rd6eEF3BTNvQnR2e2wwolfTmUTnp70aUTqr0oaGbHifzC3BKJsoV+Gat8vxUMR1hwOKBs6El+qWehrHbCpW6SQ==}
+
 snapshots:
 
   '@ampproject/remapping@2.3.0':
@@ -2231,6 +2254,11 @@ snapshots:
       long: 5.3.2
       protobufjs: 7.5.3
       yargs: 17.7.2
+
+  '@hono/zod-validator@0.2.2(hono@4.7.11)(zod@3.25.56)':
+    dependencies:
+      hono: 4.7.11
+      zod: 3.25.56
 
   '@humanfs/core@0.19.1': {}
 
@@ -2818,6 +2846,12 @@ snapshots:
     dependencies:
       websocket-driver: 0.7.4
 
+  fcm-cloudflare-workers@2.0.1(@hono/zod-validator@0.2.2(hono@4.7.11)(zod@3.25.56))(hono@4.7.11)(zod@3.25.56):
+    dependencies:
+      '@hono/zod-validator': 0.2.2(hono@4.7.11)(zod@3.25.56)
+      hono: 4.7.11
+      zod: 3.25.56
+
   fdir@6.4.5(picomatch@4.0.2):
     optionalDependencies:
       picomatch: 4.0.2
@@ -2893,6 +2927,8 @@ snapshots:
   graphemer@1.4.0: {}
 
   has-flag@4.0.0: {}
+
+  hono@4.7.11: {}
 
   http-parser-js@0.5.10: {}
 
@@ -3482,3 +3518,5 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   zimmerframe@1.1.2: {}
+
+  zod@3.25.56: {}

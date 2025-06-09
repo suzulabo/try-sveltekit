@@ -1,5 +1,8 @@
 /// <reference lib="webworker" />
 
+import { getMessaging } from 'firebase/messaging/sw';
+import { getFirebaseApp } from './lib/notification/firebase';
+
 const sw = self as unknown as ServiceWorkerGlobalScope;
 
 sw.addEventListener('install', (event) => {
@@ -9,21 +12,30 @@ sw.addEventListener('activate', (event) => {
   event.waitUntil(sw.clients.claim());
 });
 
-sw.addEventListener('push', (event) => {
-  console.log('push event');
+const fcmDefault = true;
 
-  event.waitUntil(
-    (async () => {
-      if (!event.data) {
-        return;
-      }
-      const payload = event.data.json();
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+if (fcmDefault) {
+  const firebaseApp = getFirebaseApp();
+  const messaging = getMessaging(firebaseApp);
+  console.log(messaging);
+} else {
+  sw.addEventListener('push', (event) => {
+    console.log('push event');
 
-      console.log({ payload });
+    event.waitUntil(
+      (async () => {
+        if (!event.data) {
+          return;
+        }
+        const payload = event.data.json();
 
-      const notification = payload.notification;
+        console.log({ payload });
 
-      await sw.registration.showNotification(notification.title, notification);
-    })(),
-  );
-});
+        const notification = payload.notification;
+
+        await sw.registration.showNotification(notification.title, notification);
+      })(),
+    );
+  });
+}

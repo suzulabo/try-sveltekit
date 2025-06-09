@@ -1,0 +1,7 @@
+{
+  "name": "Try Web Notification",
+  "short_name": "Try Web Notification",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone"
+}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getNotificationToken } from '$lib/notification/firebase';
+  import { getNotificationToken } from '$lib/notification/notification';
 
   let token = $state('');
 

@@ -31,21 +31,30 @@ export const getNotificationToken = async () => {
 export const listenOnMessage = () => {
   const messaging = getMessaging();
   onMessage(messaging, (payload) => {
-    console.log({ payload });
+    console.log('onMessage', payload);
     if (Notification.permission === 'granted') {
-      const { title, body, icon } = payload.notification || {};
+      const { title, body } = payload.notification || {};
       const link = payload.fcmOptions?.link;
 
       const notification = new Notification(title || 'タイトル', {
-        body: body || '本文',
-        icon: icon || '/icon.png',
+        body: body || '',
       });
 
+      console.log({ link });
       if (link) {
         notification.addEventListener('click', () => {
-          window.open(link, '_blank');
+          console.log('notification click');
+          location.href = link;
         });
       }
+    }
+  });
+
+  // https://github.com/firebase/firebase-js-sdk/issues/3922#issuecomment-1197002484
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    console.log('SW MSG:', event.data);
+    if (event.data.messageType === 'notification-clicked') {
+      window.location.href = event.data.notification.click_action;
     }
   });
 };

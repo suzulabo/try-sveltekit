@@ -56,5 +56,8 @@ export const listenOnMessage = () => {
     if (event.data.messageType === 'notification-clicked') {
       window.location.href = event.data.notification.click_action;
     }
+    if (event.data.type === 'open') {
+      window.location.href = event.data.url;
+    }
   });
 };

@@ -8,6 +8,7 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
+    "@sentry/browser": "9.28.0",
     "@sveltejs/kit": "2.21.2",
     "@sveltejs/vite-plugin-svelte": "5.1.0",
     "fcm-cloudflare-workers": "2.0.1",

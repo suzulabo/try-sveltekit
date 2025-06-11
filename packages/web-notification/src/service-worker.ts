@@ -1,5 +1,7 @@
 /// <reference lib="webworker" />
 
+import { PUBLIC_SENTRY_DSN } from '$env/static/public';
+import * as Sentry from '@sentry/browser';
 import { getMessaging } from 'firebase/messaging/sw';
 import { getFirebaseApp } from './lib/notification/firebase';
 
@@ -12,7 +14,22 @@ sw.addEventListener('activate', (event) => {
   event.waitUntil(sw.clients.claim());
 });
 
+console.log({ PUBLIC_SENTRY_DSN });
+
+if (PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    dsn: PUBLIC_SENTRY_DSN,
+    // Enable logs to be sent to Sentry
+    _experiments: { enableLogs: true },
+  });
+}
+
 const log = async (data: unknown) => {
+  if (PUBLIC_SENTRY_DSN) {
+    console.log('send sentry');
+    Sentry.logger.info(JSON.stringify(data));
+  }
+
   const res = await sw.fetch(`/api/log`, {
     method: 'POST',
     headers: {

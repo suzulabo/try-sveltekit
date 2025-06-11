@@ -50,6 +50,9 @@ importers:
 
   packages/web-notification:
     devDependencies:
+      '@sentry/browser':
+        specifier: 9.28.0
+        version: 9.28.0
       '@sveltejs/kit':
         specifier: 2.21.2
         version: 2.21.2(@sveltejs/vite-plugin-svelte@5.1.0(svelte@5.33.17)(vite@6.3.5(@types/node@22.15.30)(jiti@2.4.2)(sass-embedded@1.89.1)))(svelte@5.33.17)(vite@6.3.5(@types/node@22.15.30)(jiti@2.4.2)(sass-embedded@1.89.1))
@@ -682,6 +685,30 @@ packages:
     resolution: {integrity: sha512-LpHiJRwkaVz/LqjHjK8LCi8osq7elmpwujwbXKNW88bM8eeGxavJIKKjkjpMHAh/2xfnrt1ZSnhTv41WYUHYmA==}
     cpu: [x64]
     os: [win32]
+
+  '@sentry-internal/browser-utils@9.28.0':
+    resolution: {integrity: sha512-SqntPnIXudP3FoKj4mQ1BVPC1RNzo4CGtAxJnLpbIUpdT/khJVM6Q59zrGl2MgZ7URZCI986L5jXihQeferf6g==}
+    engines: {node: '>=18'}
+
+  '@sentry-internal/feedback@9.28.0':
+    resolution: {integrity: sha512-z2jShmVENsesmDnShEOv841Saw0zXe1tX6GHNgkK9f6NrUMbL970JvGKByBFTffhQH6uQ0WeNPnXJ5L/YKnfDg==}
+    engines: {node: '>=18'}
+
+  '@sentry-internal/replay-canvas@9.28.0':
+    resolution: {integrity: sha512-Bv4mbtUrRV3p6PpFQPseLv3+Uaen+3AlfX02Z6QHY1sMa4lpt+U8OHfRGLprnzb6Rarw6fK2LNVL5rnV9LNMwA==}
+    engines: {node: '>=18'}
+
+  '@sentry-internal/replay@9.28.0':
+    resolution: {integrity: sha512-BVGVBlmcpJdT55d/vywjfK1u6zMC5ycjJBxU1wUCNgCU3cSKRDBnvmYgk/+Ay23bFryT28Q4hM1p5qBBAOfxjQ==}
+    engines: {node: '>=18'}
+
+  '@sentry/browser@9.28.0':
+    resolution: {integrity: sha512-ttqiv3D9sIB43nZnJTTln1nXw1p4C5BDSh+sHmGUOiqdCH6ND3HByDITYMYIOz1lACSISTT4V+MEpqx0V25Tlw==}
+    engines: {node: '>=18'}
+
+  '@sentry/core@9.28.0':
+    resolution: {integrity: sha512-vzD9xhg9S864jxfCpq77feCE4y7iP2cZYsNMoTupl1vTUlmXlhp7XgF832fEMjEZq4vrPhaqCNsde7Sc3PAbaQ==}
+    engines: {node: '>=18'}
 
   '@sveltejs/acorn-typescript@1.0.5':
     resolution: {integrity: sha512-IwQk4yfwLdibDlrXVE04jTZYlLnwsTT2PIOQQGNLWfjavGifnk1JD1LcZjZaBTRcxZu2FfPfNLOE04DSu9lqtQ==}
@@ -2386,6 +2413,34 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.42.0':
     optional: true
+
+  '@sentry-internal/browser-utils@9.28.0':
+    dependencies:
+      '@sentry/core': 9.28.0
+
+  '@sentry-internal/feedback@9.28.0':
+    dependencies:
+      '@sentry/core': 9.28.0
+
+  '@sentry-internal/replay-canvas@9.28.0':
+    dependencies:
+      '@sentry-internal/replay': 9.28.0
+      '@sentry/core': 9.28.0
+
+  '@sentry-internal/replay@9.28.0':
+    dependencies:
+      '@sentry-internal/browser-utils': 9.28.0
+      '@sentry/core': 9.28.0
+
+  '@sentry/browser@9.28.0':
+    dependencies:
+      '@sentry-internal/browser-utils': 9.28.0
+      '@sentry-internal/feedback': 9.28.0
+      '@sentry-internal/replay': 9.28.0
+      '@sentry-internal/replay-canvas': 9.28.0
+      '@sentry/core': 9.28.0
+
+  '@sentry/core@9.28.0': {}
 
   '@sveltejs/acorn-typescript@1.0.5(acorn@8.14.1)':
     dependencies:

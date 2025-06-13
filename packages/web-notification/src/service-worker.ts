@@ -45,37 +45,6 @@ const isIOS = () => {
   return /iphone|ipad|ipod/i.test(sw.navigator.userAgent);
 };
 
-const readyClients = new Set<string>();
-
-sw.addEventListener('message', (event) => {
-  if (event.source && 'id' in event.source) {
-    readyClients.add(event.source.id);
-  }
-});
-
-const waitForClient = (id: string) => {
-  if (readyClients.has(id)) {
-    return Promise.resolve(true);
-  }
-
-  return new Promise<boolean>((resolve) => {
-    const timer = sw.setTimeout(() => {
-      resolve(false);
-      sw.removeEventListener('message', handler);
-    }, 5000);
-
-    const handler = (event: ExtendableMessageEvent) => {
-      if (event.source && 'id' in event.source && event.source.id === id) {
-        sw.removeEventListener('message', handler);
-        sw.clearTimeout(timer);
-        resolve(true);
-      }
-    };
-
-    sw.addEventListener('message', handler);
-  });
-};
-
 // https://github.com/firebase/firebase-js-sdk/blob/23069208726dc1924011eb84c8bf34d6f914a3a9/packages/messaging/src/listeners/sw-listeners.ts
 sw.addEventListener('push', (event) => {
   event.waitUntil(
@@ -117,25 +86,22 @@ const onNotificationClick = async (event: NotificationEvent) => {
     return;
   }
 
-  const clientList = (await sw.clients.matchAll({})) as WindowClient[];
-  let client = clientList.shift();
+  const client = await sw.clients.openWindow('/ios-pwa');
   if (!client) {
-    await log('create client');
-    client = (await sw.clients.openWindow('/ios-pwa')) ?? undefined;
-  }
-
-  if (client) {
-    await client.focus();
-    const ready = await waitForClient(client.id);
-    await log({ ready });
-    if (ready) {
-      client.postMessage({ type: 'open', link });
-    } else {
-      await client.navigate(link);
-    }
-  } else {
     await log('no client');
+    return;
   }
+  await log({
+    client: {
+      id: client.id,
+      type: client.type,
+      frameType: client.frameType,
+      focused: client.focused,
+    },
+  });
+  const openLink = `x-safari-https://${location.host}${link}`;
+  await log({ openLink });
+  await client.navigate(openLink);
 };
 
 sw.addEventListener('notificationclick', (event) => {

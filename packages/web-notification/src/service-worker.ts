@@ -68,33 +68,6 @@ sw.addEventListener('push', (event) => {
   );
 });
 
-const getClient = async () => {
-  const clients = await sw.clients.matchAll({ type: 'window', includeUncontrolled: false });
-  return clients.find((client) => {
-    return client.focused;
-  });
-};
-
-const waitForClient = async () => {
-  for (let i = 0; i < 10; i++) {
-    const client = await getClient();
-    if (client) {
-      return client;
-    }
-
-    await log('no client');
-
-    await new Promise<void>((resolve) => {
-      sw.setTimeout(() => {
-        resolve();
-      }, 100);
-    });
-  }
-
-  await log('create client');
-  return await sw.clients.openWindow('/ios-pwa');
-};
-
 const onNotificationClick = async (event: NotificationEvent) => {
   await log('notificationclick event');
   event.notification.close();
@@ -112,7 +85,7 @@ const onNotificationClick = async (event: NotificationEvent) => {
     return;
   }
 
-  const client = await waitForClient();
+  const client = await sw.clients.openWindow('/ios-pwa');
 
   if (!client) {
     await log('no client');
@@ -129,6 +102,18 @@ const onNotificationClick = async (event: NotificationEvent) => {
   const openLink = `x-safari-https://${location.host}${link}`;
   await log({ openLink });
   await client.navigate(openLink);
+
+  const clients = await sw.clients.matchAll({ type: 'window', includeUncontrolled: true });
+  await log(
+    clients.map((client) => {
+      return {
+        id: client.id,
+        type: client.type,
+        frameType: client.frameType,
+        focused: client.focused,
+      };
+    }),
+  );
 };
 
 sw.addEventListener('notificationclick', (event) => {

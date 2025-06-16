@@ -1,0 +1,7 @@
+{
+  "name": "Try Web Notification2",
+  "short_name": "Try Web Notification2",
+  "start_url": "/ios-pwa",
+  "scope": "/ios-pwa",
+  "display": "standalone"
+}

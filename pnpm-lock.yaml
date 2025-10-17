@@ -84,6 +84,27 @@ importers:
         specifier: 'catalog:'
         version: 5.9.3
 
+  packages/jwt-auth:
+    devDependencies:
+      '@sveltejs/kit':
+        specifier: 'catalog:'
+        version: 2.21.2(@sveltejs/vite-plugin-svelte@5.1.0(svelte@5.33.17)(vite@6.3.5(@types/node@24.8.1)(jiti@2.6.1)(sass-embedded@1.89.1)(yaml@2.8.1)))(svelte@5.33.17)(vite@6.3.5(@types/node@24.8.1)(jiti@2.6.1)(sass-embedded@1.89.1)(yaml@2.8.1))
+      '@sveltejs/vite-plugin-svelte':
+        specifier: 'catalog:'
+        version: 5.1.0(svelte@5.33.17)(vite@6.3.5(@types/node@24.8.1)(jiti@2.6.1)(sass-embedded@1.89.1)(yaml@2.8.1))
+      svelte:
+        specifier: 'catalog:'
+        version: 5.33.17
+      svelte-check:
+        specifier: 'catalog:'
+        version: 4.2.1(picomatch@4.0.3)(svelte@5.33.17)(typescript@5.9.3)
+      vite:
+        specifier: 'catalog:'
+        version: 6.3.5(@types/node@24.8.1)(jiti@2.6.1)(sass-embedded@1.89.1)(yaml@2.8.1)
+      vitest:
+        specifier: 'catalog:'
+        version: 3.2.2(@types/debug@4.1.12)(@types/node@24.8.1)(jiti@2.6.1)(sass-embedded@1.89.1)(yaml@2.8.1)
+
   packages/web-notification:
     devDependencies:
       '@sentry/browser':

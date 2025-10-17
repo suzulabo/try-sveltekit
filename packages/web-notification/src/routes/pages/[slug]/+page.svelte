@@ -1,14 +1,14 @@
-<script lang="ts">
-  import type { PageProps } from './$types';
+<script lang='ts'>
+  import type { PageProps } from './$types'
 
-  let { data }: PageProps = $props();
+  const { data }: PageProps = $props()
 </script>
 
-<div class="container">
+<div class='container'>
   {data.slug}
 </div>
 
-<style lang="scss">
+<style lang='scss'>
   .container {
     margin: 20svh auto;
     width: min-content;
